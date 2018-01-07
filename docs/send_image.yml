@@ -8,18 +8,18 @@ parameters:
     schema:
       id: data
       properties:
-        type:
+        type: 
           type: string
           enum:
             - simple
             - image
-          default: 'simple'
+          default: 'image'
         body:
           type: string
-          default: 'This is a test Message (for simple), or path image (/tmp/image.png)'
+          default: '/root/fb-post.jpg' 
         address:
           type: string
-          default: '6285283731125'
+          default: '6285283731125' 
 
 responses:
   200:

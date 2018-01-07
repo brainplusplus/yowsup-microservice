@@ -5,7 +5,23 @@ import logging
 
 from nameko.extensions import DependencyProvider
 from yowsup.layers.network import YowNetworkLayer
+from yowsup.layers.protocol_groups.protocolentities import *
+from yowsup.layers.protocol_presence.protocolentities import *
+from yowsup.layers.protocol_messages.protocolentities import *
+from yowsup.layers.protocol_ib.protocolentities import *
+from yowsup.layers.protocol_iq.protocolentities import *
+from yowsup.layers.protocol_contacts.protocolentities import *
+from yowsup.layers.protocol_chatstate.protocolentities import *
+from yowsup.layers.protocol_privacy.protocolentities import *
+from yowsup.layers.protocol_media.protocolentities import *
+from yowsup.layers.protocol_media.mediauploader import MediaUploader
+from yowsup.layers.protocol_profiles.protocolentities import *
 from yowsup.layers.protocol_media import YowMediaProtocolLayer
+
+from yowsup.layers                                     import YowLayer
+from yowsup.layers.interface                           import YowInterfaceLayer, ProtocolEntityCallback
+from yowsup.layers.protocol_receipts.protocolentities  import OutgoingReceiptProtocolEntity
+from yowsup.layers.protocol_acks.protocolentities      import OutgoingAckProtocolEntity
 from yowsup.layers import YowLayerEvent
 from yowsup.stacks import YowStackBuilder
 from yowsup.layers.auth import AuthError
@@ -67,6 +83,12 @@ class YowsupExtension(DependencyProvider):
         self.output('Trying to send Message to %s:%s' % (address, message))
       
         self.stack.broadcastEvent(YowLayerEvent(name=SendReciveLayer.EVENT_SEND_MESSAGE, msg=message, number=address))
+        return True
+    
+    def sendImageMessage(self, address,message):
+        self.output('Trying to send Message to %s:%s' % (address, message))
+        
+        self.stack.broadcastEvent(YowLayerEvent(name=SendReciveLayer.EVENT_SEND_IMAGE_MESSAGE, msg=message, number=address)) 
         return True
 
     def get_dependency(self, worker_ctx):

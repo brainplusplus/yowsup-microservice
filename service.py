@@ -22,6 +22,18 @@ class yowsup(object):
         #output = self.y.sendCommand('Test')
         #logging.info(output)
 
+    @rpc
+    def sendImage(self, type, body, address):
+        logging.info('Get message: %s,%s,%s' % (type, body, address))
+        output = self.y.sendImageMessage(address, body)
+        
+        
+        return True
+        #pprint(self)
+        #logging.info(self.y)
+        #output = self.y.sendCommand('Test')
+        #logging.info(output)
+
 
 
 
